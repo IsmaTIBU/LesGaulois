@@ -13,20 +13,20 @@ public class Romain {
 		return nom;
 	}
 	
-	public int recevoirCoup(int forceCoup) {
+	public void recevoirCoup(int forceCoup) {
 		force-=forceCoup;
 		if(forceCoup<0) {
 			force=0;
 		}
-		return force;
+		if(force==0) {
+			System.out.println("Le romain "+getNom()+": "+"J'abandonne");
+		}else {
+			System.out.println("Le romain "+getNom()+": "+"Aï¿½e !");
+		}
+		
 	}
 	
 	public void parler(String phrase) {
 		System.out.println("Le romain "+getNom()+": '"+phrase+"'");
-		if(force==0) {
-			System.out.println("Le romain "+getNom()+": "+"J'abandonne");
-		}else {
-			System.out.println("Le romain "+getNom()+": "+"Aîe !");
-		}
 	}
 }
