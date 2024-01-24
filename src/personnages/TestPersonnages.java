@@ -7,8 +7,9 @@ public class TestPersonnages {
 		Romain minus = new Romain("Minus", 5);
 		asterix.parler("Bonjour à tous");	
 		minus.parler("UN GAU... UN GAUGAU...");
-		for (i=0;i<6;i++) {
+		for(i=0;i<3;i++) {
 			asterix.frapper(minus);
+			minus.frapper(asterix);
 		}
 	}
 }

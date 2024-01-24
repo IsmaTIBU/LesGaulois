@@ -11,7 +11,8 @@ public class TestGaulois {
 		romain.parler("UN GAU� UN GAUGAU�");
 		int i;
 		for(i=0;i<3;i++) {
-			asterix.frapper(romain);
+			asterix.frapper(romain,asterix);
+			romain.frapper(asterix,romain);
 		}
 	}
 }

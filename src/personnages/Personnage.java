@@ -14,12 +14,14 @@ public abstract class Personnage {
 	}
 
 	public void parler(String phrase) {
-		System.out.println(donnerAuteur() + getNom() + ": '" + phrase + "'");
+		System.out.println("Le "+donnerAuteur() + getNom() + ": '" + phrase + "'");
 	}
 
 	protected abstract String donnerAuteur();
 
 	public void frapper(Personnage personnage) {
+		System.out.println("Le "+donnerAuteur()+nom+" donne un grand coup au "+personnage.donnerAuteur()+personnage.nom);
+		
 		personnage.recevoirCoup(force / 3);
 	}
 
