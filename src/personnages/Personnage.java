@@ -1,40 +1,52 @@
 package personnages;
 
 public abstract class Personnage {
+
 	private String nom;
 	private int force;
 
-	protected Personnage(String nom, int force) {
+	// constructeur
+
+	public Personnage(String nom, int force) {
 		this.nom = nom;
 		this.force = force;
 	}
 
+	// méthodes
+
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
 
-	public void parler(String phrase) {
-		System.out.println("Le "+donnerAuteur() + getNom() + ": '" + phrase + "'");
+	public void parler(String text) {
+		System.out.println(donnerAuteur() + this.nom + ": « " + text + " »");
 	}
 
-	protected abstract String donnerAuteur();
-
-	public void frapper(Personnage personnage) {
-		System.out.println("Le "+donnerAuteur()+nom+" donne un grand coup au "+personnage.donnerAuteur()+personnage.nom);
-		
-		personnage.recevoirCoup(force / 3);
+	public void frapper(Personnage adversaire) {
+		System.out.println(donnerAuteur() + this.getNom() + " envoie un grand coup dans la mâchoire de "
+				+ donnerAuteur() + adversaire.getNom());
+		adversaire.recevoirCoup((this.force / 3));
 	}
 
-	public void recevoirCoup(int forceCoup) {
-		force = force - forceCoup;
-		if (force < 0) {
-			force = 0;
+	public void recevoirCoup(int force) {
+		this.force = this.force - force;
+		if (this.force < 0) {
+			this.force = 0;
 		}
-		if (force == 0) {
-			System.out.println(donnerAuteur() + getNom() + ": " + "J'abandonne");
+		if (this.force > 0) {
+			parler("Aïe !");
 		} else {
-			System.out.println(donnerAuteur() + getNom() + ": " + "Aïe !");
+			parler("J'abandonne !");
 		}
+	}
+
+	public abstract String donnerAuteur();
+
+	// main
+
+	public static void main(String[] args) {
+		Gaulois asterix = new Gaulois("Astérix", 8);
+		System.out.println(asterix.getNom());
 	}
 
 }

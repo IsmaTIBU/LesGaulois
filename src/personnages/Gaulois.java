@@ -5,7 +5,7 @@ public class Gaulois extends Personnage {
 		super(nom,force);
 	}
 	@Override
-	protected String donnerAuteur() {
+	public String donnerAuteur() {
 		return "gaulois ";
 	}
 }
