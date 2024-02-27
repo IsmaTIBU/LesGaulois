@@ -1,43 +1,66 @@
 package sites;
 
-import personnages.*;
+import personnages.Grade;
+import personnages.Soldat;
 
 public class Camp {
-    private Soldat commandant;
-    private Soldat[] soldats = new Soldat[80];
-    private int nbsoldat = 0;
+	
+	private Soldat commandant;
+	private Soldat[] armeeRomaine = new Soldat[4];
+	private int nbSoldats = 0;
+	
+		
+	public Camp(Soldat commandant) {
+		this.commandant = commandant;
+		}
+	
+	public boolean ajouterSoldat(Soldat recrue) {
+		
+		if (getNbSoldats() < getArmeeRomaine().length) {
+			getArmeeRomaine()[getNbSoldats()] = recrue;
+			System.out.println("Le " + recrue.donnerAuteur() + recrue.getNom() + " : "
+					+ "\"Je mets mon epee au service de Rome dans le camp dirige par \" " + commandant.getNom());
+			nbSoldats = getNbSoldats() + 1;
+			return true;
+		}
+		System.out.println("Le " + recrue.donnerAuteur() + commandant.getNom() + " : \" Désolé " + recrue.getNom()
+				+ " notre camp est complet ! \"");
+		return false;
+	}
+	
+	
+	public void afficherCamp() {
+		
+		System.out.println("Le camp dirigé par le "+commandant.grade+" " + commandant.getNom() +" contient les soldats : " );
+		for(int i =0 ; i<getNbSoldats() ; i++) {
+			
+			System.out.println("- " +getArmeeRomaine()[i].getNom());
+		}
+		
+	}
 
-    public Camp(Soldat commandant) {
-        this.commandant = commandant;
-    }
+	public void changerCommandant(Soldat commandant) {
+		if (commandant.grade != Grade.CENTURION) {
+			this.commandant = commandant;
+			System.out.println("Le " + commandant.donnerAuteur() +" "+ commandant.getNom()
+					+ " : \" Je ne suis pas suffisamment gradé pour prendre la direction du camp\r\n" + "romain. \".");
+		} else {
+			System.out.println("Le " + commandant.donnerAuteur() +" "+ commandant.getNom() + " \"Moi " + commandant.getNom()
+					+ " je prends la direction du camp romain.\"");
+		}
+	}
+	
+	
+	public Soldat getCommandant() {
+		return commandant;
+	}
 
-    public Soldat getCommandant() {
-        return commandant;
-    }
+	public Soldat[] getArmeeRomaine() {
+		return armeeRomaine;
+	}
 
-    public void addsoldat(Soldat soldat) {
-        if (nbsoldat <= this.soldats.length ) {
-            commandant.parler("Désolé " + soldat.getNom() + " mon camp est complet !");
-        } else {
-            soldats[nbsoldat] = soldat;
-            nbsoldat++;
-            soldat.parler("Je mets mon épée au service de Rome dans le camp dirigé par " + commandant.getNom());
-        }
-    }
-
-    public void afficherCamp() {
-        System.out.println("Le camp dirigé par " + commandant.getNom() + " contient les soldats : ");
-        for (int i = 0; i < nbsoldat; i++) {
-            System.out.println("- " + soldats[i].getNom());
-        }
-    }
-
-    public void changerCommandant(Soldat nouveauCommandant) {
-        if (nouveauCommandant.getGrade() != Grade.CENTURION) {
-            nouveauCommandant.parler("Je ne suis pas suffisamment gradé pour prendre la direction du camp romain.");
-        } else {
-            this.commandant = nouveauCommandant;
-            nouveauCommandant.parler("Moi " + nouveauCommandant.getNom() + " je prends la direction du camp romain.");
-        }
-    }
+	public int getNbSoldats() {
+		return nbSoldats;
+	}
+	
 }
