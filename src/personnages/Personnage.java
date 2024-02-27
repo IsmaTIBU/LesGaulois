@@ -17,9 +17,9 @@ public abstract class Personnage {
 	}
 	
 	public void frapper(Personnage adversaire) {
-		if(!adversaire.persoKO() && !this.persoKO()) {
+		System.out.println("Le " + donnerAuteur() + " " + this.getNom() + " envoie un grand coup dans la mâchoire du "
+				+ adversaire.donnerAuteur() + " " + adversaire.getNom());
 			adversaire.recevoirCoup(force / 3);
-		}
 	}
 	public void recevoirCoup(double force) {
 		this.force -= force;
