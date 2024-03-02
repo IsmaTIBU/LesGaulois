@@ -1,5 +1,7 @@
 package personnages;
 
+import equip_Gaulois.Potion;
+
 public class Gaulois extends Personnage {
 	private double puissancePotion = 1.0;
 
@@ -12,18 +14,26 @@ public class Gaulois extends Personnage {
 		return "gaulois";
 	}
 
+	public void boirePotion(Potion potion) {
+		if ("Obélix".equals(this.nom)) {
+			this.parler("Non, non, non ! Je n'ai pas le droit de boire de la potion magique !");
+			return;
+		}
+		this.puissancePotion = potion.getPuissance();
+		this.parler("boit une potion de puissance " + this.puissancePotion);
+	}
+
 	public void setPuissancePotion(int puissance) {
 		puissancePotion = puissance;
 	}
 
 	@Override
-	public void frapper(Personnage adversaire) {
-		double forceCoup = (double) (this.force * this.puissancePotion);
-		System.out.println("Le " + donnerAuteur() + " " + this.getNom() + " envoie un grand coup dans la mâchoire du "
-				+ adversaire.donnerAuteur() + " " + adversaire.getNom());
-		adversaire.recevoirCoup(forceCoup);
-		this.puissancePotion = Math.max(1.0, this.puissancePotion - 0.5);
-
+	protected int calculForceFrappe() {
+		int forceCoup =  (int) (super.calculForceFrappe() * this.puissancePotion);
+		puissancePotion-=0.5;
+		if(puissancePotion<1)
+			puissancePotion=1;
+		return forceCoup;
 	}
 
 }
