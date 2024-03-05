@@ -29,10 +29,10 @@ public class Gaulois extends Personnage {
 
 	@Override
 	protected int calculForceFrappe() {
-		int forceCoup =  (int) (super.calculForceFrappe() * this.puissancePotion);
-		puissancePotion-=0.5;
-		if(puissancePotion<1)
-			puissancePotion=1;
+		int forceCoup = (int) (super.calculForceFrappe() * this.puissancePotion);
+		puissancePotion -= 0.5;
+		if (puissancePotion < 1)
+			puissancePotion = 1;
 		return forceCoup;
 	}
 

@@ -5,37 +5,33 @@ import equip_Romain.*;
 public class Soldat extends Romain {
 
 	public Grade grade;
-	public Casque casque;
-	public Bouclier bouclier;
-	public Plastron plastron;
+	private Equipement casque = null;
+	private Equipement bouclier = null;
+	private Equipement plastron = null;
 
 	public Soldat(String nom, int force, Grade grade) {
 		super(nom, force);
 		this.grade = grade;
 	}
-	
-	public Grade getGrade() {
-        return this.grade;
-    }
 
 	private double protection(double force) {
-		if (casque.defense > 0) {
+		if (casque.getDefense() > 0) {
 			force -= 2;
-			System.out.println("Le casque attenue les dégats de " + casque.defense);
+			System.out.println("Le casque absorbe " + Equipement.CASQUE.getDefense() + " du coup.");
 		} else {
-			casque.defense = 0;
+			casque = null;
 		}
-		if (bouclier.defense > 0) {
+		if (bouclier.getDefense() > 0) {
 			force -= 3;
-			System.out.println("Le bouclier attenue les dégats de " + bouclier.defense);
+			System.out.println("Le bouclier absorbe " + Equipement.BOUCLIER.getDefense() + " du coup.");
 		} else {
-			bouclier.defense = 0;
+			bouclier = null;
 		}
-		if (plastron.defense > 0) {
+		if (plastron.getDefense() > 0) {
 			force -= 3;
-			System.out.println("Le plastron attenue les dégats de " + plastron.defense);
+			System.out.println("Le plastron absorbe " + Equipement.PLASTRON.getDefense() + " du coup.");
 		} else {
-			plastron.defense = 0;
+			plastron = null;
 		}
 		if (force < 0) {
 			force = 0;
@@ -45,21 +41,21 @@ public class Soldat extends Romain {
 
 	public void equiperArmure() {
 		if (casque == null) {
-			casque = new Casque();
-			System.out.println("Le soldat " + nom + " s'équipe d'un casque.");
+			casque = Equipement.CASQUE;
+			System.out.println("Le " + grade.getDescription() + " " + nom + " s'équipe d'un casque.");
 		} else
-			parler("J'ai déja un casque");
+			parler("J'ai d�ja un casque");
 
 		if (plastron == null) {
-			plastron = new Plastron();
-			System.out.println("Le soldat " + nom + " s'équipe d'un plastron.");
+			plastron = Equipement.PLASTRON;
+			System.out.println("Le" + grade.getDescription() + " " + nom + " s'équipe d'un plastron.");
 		} else
-			this.parler("J'ai déja un plastron");
+			this.parler("J'ai d�ja un plastron");
 		if (bouclier == null) {
-			bouclier = new Bouclier();
-			System.out.println("Le soldat " + nom + " s'équipe d'un bouclier.");
+			bouclier = Equipement.BOUCLIER;
+			System.out.println("Le" + grade.getDescription() + " " + nom + " s'équipe d'un bouclier.");
 		} else
-			this.parler("J'ai déja un bouclier");
+			this.parler("J'ai d�ja un bouclier");
 
 	}
 
